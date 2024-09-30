@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+{% block content %}
+<br />
+<div class="container mt-5">
+    <div class="card mb-4">
+        <div class="card-body">
+            <h1 class="card-title">{{ task.title }}</h1>
+            <p class="card-text"><strong>Description: </strong>{{ task.description }}</p>
+            <p class="card-text"><strong>Completed: </strong>{{ task.completed }}</p>
+            <p class="card-text"><strong>Created At: </strong> {{ task.created_at.strftime('%B %d, %Y at %I:%M %p') }}</p>
+            <p class="card-text"><strong>Due Date: </strong> {{ task.due_date.strftime('%B %d, %Y') }}</p>
+            {% if not task.completed %}
+                <a href="/tasks/{{ task.id }}/toggle-status" class="btn btn-primary">Mark as Completed</a>
+            {% else %}
+                <a href="/tasks/{{ task.id }}/toggle-status" class="btn btn-primary">Not Done Yet</a>
+            {% endif %}
+            <a href="/tasks/{{ task.id }}/edit" class="btn btn-primary">Edit</a>
+            <a href="/tasks/{{ task.id }}/delete" class="btn btn-primary">Delete</a>
+        </div>
+    </div>
+</div>
+<br />
+{% endblock %}

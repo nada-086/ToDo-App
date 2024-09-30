@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+{% block content %}
+<br />
+<h1>Tasks</h1>
+{% for task in tasks %}
+<br />
+<div class="card w-75">
+    <div class="card-body">
+        <h5 class="card-title">{{ task.title }}</h5>
+        <a href="/tasks/{{ task.id }}" class="btn btn-primary">Manage</a>
+    </div>
+</div>
+{% endfor %}
+<br />
+{% endblock %}

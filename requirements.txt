@@ -1,0 +1,6 @@
+Flask
+flask_login
+flask_sqlalchemy
+flask_inject
+python_dotenv
+werkzeug
