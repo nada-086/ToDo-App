@@ -66,6 +66,16 @@ def test_add_task_with_invalid_input(login_user_fixture):
     assert response.status_code == 400 
     assert Task.query.count() == 0
 
+# Test the add task with an wrong date formate which is wrong
+def test_add_task_with_invalid_input(login_user_fixture):
+    response = login_user_fixture.post('/tasks/create', data={
+        'title': '',
+        'due-date': '2222222222',
+        'description': 'This task has no title.'
+    })
+    assert response.status_code == 400
+    assert Task.query.count() == 0
+
 # Test marking a task as completed
 def test_mark_task_as_complete(login_user_fixture):
     task = Task(title='Complete Me', description='This task will be completed.',
