@@ -4,3 +4,6 @@ flask_sqlalchemy
 flask_inject
 python_dotenv
 werkzeug
+pytest
+pytest-flask
+flask_injector

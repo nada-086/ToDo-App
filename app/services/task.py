@@ -42,11 +42,8 @@ class TaskService:
         self.db.session.commit()
 
     def delete(self, task):
-        if task.user_id == current_user.id:
-            self.db.session.delete(task)
-            self.db.session.commit()
-        else:
-            raise Exception("Unauthorized Action.")
+        self.db.session.delete(task)
+        self.db.session.commit()
         
     def toggle_status(self, task):
         task.completed = (not task.completed)

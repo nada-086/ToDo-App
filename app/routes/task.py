@@ -27,15 +27,14 @@ def store_task(task_service: TaskService):
     task_description = request.form.get('description')
 
     if not task_title:
-        return render_template('./task/create.html', message="All Fields are Required.")
-
-    print("Passed")
+        return render_template('./task/create.html', message="All Fields are Required."), 400
+    if len(task_title) > 200:
+        return render_template('./task/create.html', message="Title Maximum Length is 200."), 400
     try:
         task_service.create(title=task_title, description=task_description, user_id=current_user.id, due_date=task_date)
     except Exception as e:
-        print("Exception: " + str(e))
-        return render_template('./task/create.html', message=str(e))
-    return redirect('/tasks')
+        return render_template('./task/create.html', message=str(e)), 500
+    return redirect('/tasks'), 302
 
 
 @task.route('/<id>')
@@ -43,8 +42,8 @@ def store_task(task_service: TaskService):
 def view_task(task_service: TaskService, id):
     task = task_service.get_by_id(id)
     if not task:
-        return redirect('/tasks')
-    return render_template('./task/view.html', task=task)
+        return redirect('/tasks'), 400
+    return render_template('./task/view.html', task=task), 302
 
 
 @task.route('/<id>/edit')
@@ -52,8 +51,8 @@ def view_task(task_service: TaskService, id):
 def edit_task(task_service: TaskService, id):
     task = task_service.get_by_id(id)
     if not task:
-        return redirect('/tasks')
-    return render_template('./task/edit.html', task=task)
+        return redirect('/tasks'), 400
+    return render_template('./task/edit.html', task=task), 302
 
 
 @task.route('/<id>', methods=['POST'])
@@ -61,17 +60,17 @@ def edit_task(task_service: TaskService, id):
 def update_task(task_service: TaskService, id):
     task = task_service.get_by_id(id)
     if not task:
-        return render_template('./task/view.html', message="Page Not Found")
+        return render_template('./task/view.html', message="Page Not Found"), 400
 
     task_title = request.form.get('title')
     task_description = request.form.get('description')
     task_due_date = request.form.get('due-date')
 
     if not task:
-        return render_template('./task/view.html', task=task, message="Enter a Unique Title")
+        return render_template('./task/view.html', task=task, message="Enter a Unique Title"), 500
 
     task_service.update(task, task_title, task_description, task_due_date)
-    return render_template('./task/view.html', task=task)
+    return render_template('./task/view.html', task=task), 302
 
 
 @task.route('/<id>/delete')
@@ -79,23 +78,22 @@ def update_task(task_service: TaskService, id):
 def delete_task(task_service: TaskService, id):
     task = task_service.get_by_id(id)
     if not task:
-        return redirect('/tasks')
+        return redirect('/tasks'), 400
     task_service.delete(task)
-    return redirect('/tasks')
+    return redirect('/tasks'), 302
 
 @task.route('/<id>/toggle-status')
 @inject
 def toggle_status(task_service: TaskService, id):
     task = task_service.get_by_id(id)
     if not task:
-        return redirect('/tasks')
+        return redirect('/tasks'), 400
     task_service.toggle_status(task)
-    return redirect(f'/tasks/{task.id}')
+    return redirect(f'/tasks/{task.id}'), 302
 
 @task.route('/search', methods=['POST'])
 @inject
 def search(task_service: TaskService):
     topic = request.form.get('search')
     tasks = task_service.get_by_topic(topic)
-    print(tasks)
     return render_template('./task/list.html', tasks=tasks)
