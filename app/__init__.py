@@ -1,7 +1,7 @@
 from flask import Flask, redirect
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager
+from flask_login.login_manager import LoginManager
 
 db = SQLAlchemy()
 
