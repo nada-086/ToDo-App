@@ -52,3 +52,28 @@ Task Manager
 
 ## Product BackLog
 [Figma URL](https://www.figma.com/board/ioMlZPs6OdTUBh5Yqa2uJT/Product-Backlog?node-id=0-1&p=f)
+
+
+## How to Run the Application
+### Automated Method
+- You can use this [Bash Script](https://github.com/nada-086/Bash-Scripts/blob/main/Flask%20Application%20Deployment/script.sh) to run it easily on RedHat Based Distributions.
+- Main Points in the Script:
+   - Cloning the Repo
+   - Installing the necessary dependencies
+   - Setting up the virtual environment required to run the app.
+   - Use Gunicorn to host the application.
+   - Use Nginx as a reverse proxy.
+### Alternative Method (Manually)
+1. Cloning the Repo
+   `git clone https://github.com/nada-086/ToDo-App.git`
+2. Start Virtual Environment and Install the Dependencies
+   `cd ToDo-App
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt`
+3. Instantiating Flask Migrator
+   `flask db init
+   flask db migrate -m "Initial migration"
+   flask db upgrade`
+4. Run the App
+   `flask run`
