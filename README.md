@@ -65,15 +65,23 @@ Task Manager
    - Use Nginx as a reverse proxy.
 ### Alternative Method (Manually)
 1. Cloning the Repo
-   `git clone https://github.com/nada-086/ToDo-App.git`
+   ```
+   git clone https://github.com/nada-086/ToDo-App.git
+   ```
 2. Start Virtual Environment and Install the Dependencies
-   `cd ToDo-App
+   ```
+   cd ToDo-App
    python3 -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt`
+   pip install -r requirements.txt
+   ```
 3. Instantiating Flask Migrator
-   `flask db init
+   ```
+   flask db init
    flask db migrate -m "Initial migration"
-   flask db upgrade`
+   flask db upgrade
+   ```
 4. Run the App
-   `flask run`
+   ```
+   flask run
+   ```
