@@ -27,6 +27,7 @@ The project uses the following Python libraries:
 - **flask_inject**: Dependency injection for better modularity.
 - **python_dotenv**: Manage environment variables securely.
 - **werkzeug**: Provides utility functions and a secure password hashing system.
+- **flask_migrate**: Enables database schema migrations in Flask apps using Alembic with SQLAlchemy.
 
 ### Testing
 - **pytest**: Framework for unit testing.
