@@ -28,8 +28,8 @@ ENV FLASK_APP=main.py
 ENV PATH="/opt/src/venv/bin:$PATH"
 
 # Database Instantiation
-RUN flask db init \
-    && flask db migrate -m "Initial migration" \
-    && flask db upgrade
+# RUN flask db init \
+#     && flask db migrate -m "Initial migration" \
+#     && flask db upgrade
 
 ENTRYPOINT ["flask", "run", "--host=0.0.0.0", "--port=5000"]
