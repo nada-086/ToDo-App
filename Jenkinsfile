@@ -4,13 +4,14 @@ pipeline {
     environment {
         APP_NAME = 'todo-app'
         USERNAME = 'nadaessa'
+        DOCKERHUB_TOKEN = 'dockerhub-todo-token'
     }
 
     stages {
         stage('Login to DockerHub') {
             steps {
                 withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub-todo-token',
+                    credentialsId: ${env.DOCKERHUB_TOKEN},
                     usernameVariable: 'DOCKERHUB_USERNAME',
                     passwordVariable: 'DOCKERHUB_PASSWORD'
                 )]) {
